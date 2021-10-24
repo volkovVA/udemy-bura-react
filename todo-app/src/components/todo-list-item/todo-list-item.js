@@ -3,29 +3,50 @@ import './todo-list-item.css';
 
 export default class TodoListItem extends Component {
 
-  onLabelClick = () => {
-    console.log(`Done: ${ this.props.label }`);
+  state = {
+    done: false,
+    important: false
   };
+
+  onLabelClick = () => {
+    this.setState(({ done }) => {
+      return {
+        done: !done
+      }
+    })
+  };
+
+  onMarkImportant = () => {
+    this.setState((state) => {
+      return {
+        important: !state.important
+      }
+    })
+  }
 
   render() {
 
-    const { label, important = false } = this.props;
+    const { label } = this.props;
+    const { done, important } = this.state;
 
-    const style = {
-      color: important ? 'steelblue' : 'black',
-      fontWeight: important ? 'bold' : 'normal'
-    };
+    let classNames = 'todo-list-item';
+    if (done) {
+      classNames += ' done';
+    }
+    if (important) {
+      classNames += ' important';
+    }
 
     return (
-      <span className="todo-list-item">
+      <span className={ classNames }>
         <span
           onClick={ this.onLabelClick }
-          className="todo-list-item-label"
-          style={style}>
+          className="todo-list-item-label">
           {label}
         </span>
 
         <button
+          onClick={ this.onMarkImportant }
           type="button"
           className="btn btn-outline-success btn-sm float-right">
           <i className="fa fa-exclamation" />
