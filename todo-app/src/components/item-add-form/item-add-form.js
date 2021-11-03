@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import './item-add-form.css'
+import React, { Component } from 'react';
+import './item-add-form.css';
 
 export default class ItemAddForm extends Component {
 
@@ -10,16 +10,16 @@ export default class ItemAddForm extends Component {
   onLabelChange = (e) => {
     this.setState({
       label: e.target.value
-    })
+    });
   }
 
   onSubmit = (e) => {
-    e.preventDefault()
-    this.props.onItemAdded(this.state.label)
+    e.preventDefault();
+    this.props.onItemAdded(this.state.label);
     // e.target.reset()
     this.setState({
       label: ''
-    })
+    });
   }
 
   render() {

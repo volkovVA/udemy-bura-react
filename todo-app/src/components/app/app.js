@@ -17,16 +17,16 @@ export default class App extends Component {
       this.createTodoItem('Have a lunch'),
     ],
     term: '',
-    filter: 'active'  // active, all, done
-  };
+    filter: 'all'
+  }
 
   createTodoItem(label) {
     return {
-        label,
-        important: false,
-        done: false,
-        id: this.maxId++
-      }
+      label,
+      important: false,
+      done: false,
+      id: this.maxId++
+    }
   }
 
   deleteItem = (id) => {
@@ -34,14 +34,13 @@ export default class App extends Component {
       const idx = todoData.findIndex((el) => el.id === id);
       const before = todoData.slice(0, idx);
       const after = todoData.slice(idx+1);
-
       const newArray = [...before, ...after];
       // const newArray = [ ...todoData.slice(0, idx), ...todoData.slice(idx+1)];
 
       return {
         todoData: newArray
       }
-    })
+    });
   }
 
   addItem = (text) => {
@@ -51,13 +50,12 @@ export default class App extends Component {
       const newArr = [
         ...todoData,
         newItem
-      ];
+      ]
 
       return {
         todoData: newArr
-      };
-    })
-
+      }
+    });
   }
 
   toggleProperty(arr, id, propName) {
@@ -106,7 +104,7 @@ export default class App extends Component {
       return item.label
               .toLowerCase()
               .indexOf(term.toLowerCase()) > -1;
-    })
+    });
   }
 
   filter(items, filter) {
@@ -147,7 +145,6 @@ export default class App extends Component {
         />
         <ItemAddForm onItemAdded={ this.addItem }/>
       </div>
-    )
-  };
-
+    );
+  }
 }

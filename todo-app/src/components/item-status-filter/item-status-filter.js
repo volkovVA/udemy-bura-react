@@ -10,12 +10,11 @@ export default class ItemStatusFilter extends Component {
   ]
 
   render() {
-
     const { filter, onFilterChange } = this.props;
 
     const buttons = this.buttons.map(({ name, label }) => {
       const isActive = filter === name;
-      const clazz = isActive ? 'btn-info' : 'btn-outline-secondary'
+      const clazz = isActive ? 'btn-info' : 'btn-outline-secondary';
 
       return (
         <button
@@ -26,8 +25,8 @@ export default class ItemStatusFilter extends Component {
         >
             { label }
         </button>
-      )
-    })
+      );
+    });
 
     return (
       <div className="btn-group">
@@ -35,5 +34,4 @@ export default class ItemStatusFilter extends Component {
       </div>
     );
   }
-
 }
