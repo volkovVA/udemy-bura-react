@@ -37,16 +37,6 @@ const HookSwitcher = () => {
 
 
 
-
-
-
-
-
-
-
-
-
-
 ReactDOM.render(
   <React.StrictMode>
     <App />
