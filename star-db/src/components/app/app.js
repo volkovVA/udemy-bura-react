@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 
 import Header from '../header';
 import RandomPlanet from '../random-planet';
@@ -54,10 +54,14 @@ export default class App extends Component {
             <div className="stardb-app">
               <Header onServiceChange={this.onServiceChange} />
               <RandomPlanet />
+              <Switch>
                 <Route
                   path="/"
                   exact
                   render={() => <h2>Welcome to StarDB</h2>} />
+                {/* <Route
+                  path="/people"
+                  render={() => <h2>People</h2> } /> */}
                 <Route path="/people/:id?" component={PeoplePage} />
                 <Route path="/planets" component={PlanetsPage} />
                 <Route
@@ -65,10 +69,10 @@ export default class App extends Component {
                   exact
                   component={StarshipsPage} />
                 <Route path="/starships/:id"
-                     render={({ match }) => {
-                       const { id } = match.params;
-                       return <StarshipDetails itemId={id} />
-                     }}/>
+                    render={({ match }) => {
+                      const { id } = match.params;
+                      return <StarshipDetails itemId={id} />
+                    }}/>
                 <Route
                   path="/login"
                   render={() => (
@@ -83,6 +87,10 @@ export default class App extends Component {
                     <SecretPage isLoggedIn={isLoggedIn} />
                   )}
                 />
+
+                {/* <Redirect to="/" /> */}
+                <Route render={() => <h2>Page not found</h2>} />
+              </Switch>
             </div>
           </Router>
         </SwapiServiceProvider>
