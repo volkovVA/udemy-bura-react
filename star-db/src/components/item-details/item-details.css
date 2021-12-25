@@ -18,3 +18,7 @@
 .item-details .list-group-item .term{
   margin-right: .5rem;
 }
+
+.item-details button {
+  margin-top: 5px;
+}

@@ -7,41 +7,47 @@ export default class SwapiService {
     const res = await fetch(`${this._apiBase}${url}`);
 
     if (!res.ok) {
-      throw new Error(`Could not fetch ${url}, received ${res.status}`)
+      throw new Error(`Could not fetch ${url}` +
+        `, received ${res.status}`)
     }
-
     return await res.json();
-  }
+  };
 
   getAllPeople = async () => {
     const res = await this.getResource(`/people/`);
-    return res.results.map(this._transformPerson);
-  }
+    return res.results
+      .map(this._transformPerson)
+      .slice(0, 5);
+  };
 
   getPerson = async (id) => {
-    const person = await this.getResource(`/people/${id}`);
+    const person = await this.getResource(`/people/${id}/`);
     return this._transformPerson(person);
-  }
+  };
 
   getAllPlanets = async () => {
     const res = await this.getResource(`/planets/`);
-    return res.results.map(this._transformPlanet);
-  }
+    return res.results
+      .map(this._transformPlanet)
+      .slice(0, 5);
+  };
 
   getPlanet = async (id) => {
-    const planet = await this.getResource(`/planets/${id}`);
-    return this._transformPlanet(planet)
-  }
+    const planet = await this.getResource(`/planets/${id}/`);
+    return this._transformPlanet(planet);
+  };
 
-  getAllStarShips = async () => {
+  getAllStarships = async () => {
     const res = await this.getResource(`/starships/`);
-    return res.results.map(this._transformStarship);
-  }
+    return res.results
+      .map(this._transformStarship)
+      .slice(0, 5);
+  };
 
   getStarship = async (id) => {
-    const starship = await this.getResource(`/starships/${id}`);
+    const starship = await this.getResource(`/starships/${id}/`);
     return this._transformStarship(starship);
-  }
+  };
 
   getPersonImage = ({id}) => {
     return `${this._imageBase}/characters/${id}.jpg`
@@ -58,7 +64,7 @@ export default class SwapiService {
   _extractId = (item) => {
     const idRegExp = /\/([0-9]*)\/$/;
     return item.url.match(idRegExp)[1];
-  }
+  };
 
   _transformPlanet = (planet) => {
     return {
@@ -67,8 +73,8 @@ export default class SwapiService {
       population: planet.population,
       rotationPeriod: planet.rotation_period,
       diameter: planet.diameter
-    }
-  }
+    };
+  };
 
   _transformStarship = (starship) => {
     return {
@@ -76,13 +82,13 @@ export default class SwapiService {
       name: starship.name,
       model: starship.model,
       manufacturer: starship.manufacturer,
-      costInCredits: starship.costInCredits,
+      costInCredits: starship.cost_in_credits,
       length: starship.length,
       crew: starship.crew,
       passengers: starship.passengers,
-      cargoCapacity: starship.cargoCapacity
+      cargoCapacity: starship.cargo_capacity
     }
-  }
+  };
 
   _transformPerson = (person) => {
     return {
